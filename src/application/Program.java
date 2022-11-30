@@ -1,5 +1,6 @@
 package application;
 
+import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
@@ -17,7 +18,7 @@ public class Program {
 		
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 		
-		Seller seller = sellerDao.FindbyId(3);
+		Seller seller = sellerDao.FindbyId(2);
 		
 		System.out.println(seller);
 		
@@ -26,6 +27,27 @@ public class Program {
 		for (Seller obj : list) {
 			System.out.println(obj);	
 		}
+		
+		List<Seller> listw = sellerDao.findAll();
+		for (Seller obj : listw) {
+			System.out.println(obj);	
+		}
+		
+		
+		System.out.println("Insert");
+		Seller InsertSeller = new Seller(null , "Marcos", "gmai.com@gmail.com", new Date(), 3000, departament);
+		sellerDao.insert(InsertSeller);
+		System.out.println("Inserted! id = "+ InsertSeller.getId());
+		
+		System.out.println("UPdate");
+		seller = sellerDao.FindbyId(1);
+		seller.setName("Marcola");
+		sellerDao.update(seller);
+		
+		System.out.println("Delete");
+		int id = 6;
+		sellerDao.deletebyId(id);
+		
 		
 	}
 }
